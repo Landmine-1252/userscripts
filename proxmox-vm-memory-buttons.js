@@ -42,23 +42,25 @@
         inputField.blur();
     }
 
-    // Increments the memory size by 1024 MiB
+    // Increments the memory size by 1024 MiB, rounding to the nearest 1024
     function incrementMemory() {
         const inputField = document.querySelector('input[name="memory"]');
         if (inputField) {
             let currentValue = parseInt(inputField.value) || 0;
-            currentValue += 1024; // Increment by 1024 MiB
+            // Round to nearest 1024, then add 1024
+            currentValue = Math.round(currentValue / 1024) * 1024 + 1024;
             inputField.value = currentValue;
             updateInputField(inputField);
         }
     }
-
-    // Decrements the memory size by 1024 MiB, but not below 0
+    
+    // Decrements the memory size by 1024 MiB, rounding to the nearest 1024, but not below 0
     function decrementMemory() {
         const inputField = document.querySelector('input[name="memory"]');
         if (inputField) {
             let currentValue = parseInt(inputField.value) || 0;
-            currentValue = Math.max(0, currentValue - 1024); // Decrement by 1024 MiB, minimum 0
+            // Round to nearest 1024, then subtract 1024, minimum 0
+            currentValue = Math.max(0, Math.round(currentValue / 1024) * 1024 - 1024);
             inputField.value = currentValue;
             updateInputField(inputField);
         }
