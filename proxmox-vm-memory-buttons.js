@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Proxmox Quick Memory Buttons
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.1.1
 // @description  Add quick memory buttons to the `Create VM` Wizard
 // @author       Landmine
 // @match        https://10.0.0.100:8006
@@ -79,14 +79,14 @@
 
         // Add Increment (+1024 MiB) Button
         const incrementButton = document.createElement('button');
-        incrementButton.textContent = '+1G';
+        incrementButton.textContent = '+1GiB';
         incrementButton.style.marginRight = '4px';
         incrementButton.onclick = incrementMemory;
         buttonContainer.appendChild(incrementButton);
 
         // Add Decrement (-1024 MiB) Button
         const decrementButton = document.createElement('button');
-        decrementButton.textContent = '-1G';
+        decrementButton.textContent = '-1GiB';
         decrementButton.style.marginRight = '4px';
         decrementButton.onclick = decrementMemory;
         buttonContainer.appendChild(decrementButton);
