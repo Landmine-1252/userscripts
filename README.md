@@ -2,15 +2,15 @@
 
 Some userscripts to make my life a little easier and some websites in my opinion a little better.
 
-## imdb-larger-photos
+## IMDB Larger Photos - imdb-larger-photos.js
 
-Enhance your browsing experience on IMDb (Internet Movie Database) by automatically enlarging the thumbnail photos of actors and actresses on IMDb cast lists. This script modifies the default small images to a larger size, making them clearer and easier to view.
+Modifies the default small images to a larger size on the IMDB Cast page.
 
 ![Screenshot](/images/imdb-larger-photos.png)
 
-## proxmox-vm-memory-buttons.js
+## Proxmox Quick Memory Buttons - proxmox-vm-memory-buttons.js
 
-Enhances the user experience in the Proxmox Virtual Environment by adding quick memory adjustment buttons to the "Create VM" wizard. It's designed to make the process of setting up virtual machines more efficient and user-friendly.
+Adds quick memory adjustment buttons to the "Create VM" wizard.
 
 ### Features
 
@@ -40,3 +40,7 @@ If you have multiple servers you can add multiple `@match` lines
 ## proxmox-vm-memory-slider.js (WIP)
 
 This is based on `proxmox-vm-memory-buttons.js` but would display the UI to the user as a slider bar like you would see in VMWare Workstation or VirtualBox.
+
+## YouTube Short Redirect - youtube-shorts-redirect.js
+
+YouTube Short links are redirected to normal video links to enable video controls.

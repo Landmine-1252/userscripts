@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         IMDB Larger Photos
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Enlarge Actor's Photos on IMDB
+// @version      1.0.1
+// @description  Modifies the default small images to a larger size on the IMDB Cast page.
 // @author       Landmine
 // @match        https://*.imdb.com/*
 // @match        http://*.imdb.com/*
