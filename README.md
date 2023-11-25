@@ -8,7 +8,7 @@ Modifies the default small images to a larger size on the IMDB Cast page.
 
 ![Screenshot](/images/imdb-larger-photos.png)
 
-## Proxmox Quick Memory Buttons - proxmox-vm-memory-buttons.js
+## Proxmox VM Memory Buttons - proxmox-vm-memory-buttons.js
 
 Adds quick memory adjustment buttons to the "Create VM" wizard.
 

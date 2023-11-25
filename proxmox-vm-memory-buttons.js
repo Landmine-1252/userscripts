@@ -1,9 +1,9 @@
 
 // ==UserScript==
-// @name         Proxmox Quick Memory Buttons
+// @name         Proxmox VM Memory Buttons
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
-// @description  Add quick memory buttons to the `Create VM` Wizard
+// @version      1.1.2
+// @description  Adds quick memory adjustment buttons to the "Create VM" wizard.
 // @author       Landmine
 // @match        https://10.0.0.100:8006
 // @icon         https://www.proxmox.com/favicon.ico
