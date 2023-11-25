@@ -6,6 +6,7 @@
 // @description  Add quick memory buttons to the `Create VM` Wizard
 // @author       Landmine
 // @match        https://10.0.0.100:8006
+// @icon         https://www.proxmox.com/favicon.ico
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/Landmine-1252/userscripts/main/proxmox-vm-memory-buttons.js
 // @updateURL    https://raw.githubusercontent.com/Landmine-1252/userscripts/main/proxmox-vm-memory-buttons.js
