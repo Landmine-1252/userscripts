@@ -5,7 +5,7 @@
 // @version      1.1.2
 // @description  Adds quick memory adjustment buttons to the "Create VM" wizard.
 // @author       Landmine
-// @match        https://10.0.0.100:8006
+// @match        https://10.0.0.100:8006/*
 // @icon         https://www.proxmox.com/favicon.ico
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/Landmine-1252/userscripts/main/proxmox-vm-memory-buttons.js
