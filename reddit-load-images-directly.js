@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Load Reddit Images Directly
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  Loads reddit images directly instead of referring to the HTML page containing the image.
 // @match        *://www.reddit.com/r/*
 // @grant        none
+// @icon         https://www.reddit.com/favicon.ico
 // @updateURL    https://raw.githubusercontent.com/Landmine-1252/userscripts/main/reddit-load-images-directly.js
 // @downloadURL  https://raw.githubusercontent.com/Landmine-1252/userscripts/main/reddit-load-images-directly.js
 // ==/UserScript==
