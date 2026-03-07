@@ -1,46 +1,32 @@
-# userscripts
+# Userscripts
 
-Some userscripts to make my life a little easier and some websites in my opinion a little better.
+A small collection of personal userscripts, organized by site and kept installable from GitHub.
 
-## IMDB Larger Photos - imdb-larger-photos.js
+## Repository Layout
 
-Modifies the default small images to a larger size on the IMDB Cast page.
+- `scripts/imdb/` contains IMDb-specific userscripts.
+- `scripts/proxmox/` contains Proxmox-specific userscripts and configuration notes.
+- `scripts/reddit/` contains Reddit-specific userscripts.
+- `scripts/youtube/` contains YouTube-specific userscripts.
+- `docs/INSTALL.md` covers installation and update workflow.
 
-![Screenshot](/images/imdb-larger-photos.png)
+## Script Index
 
-## Proxmox VM Memory Buttons - proxmox-vm-memory-buttons.js
+| Site | Script | What it does | Install |
+| --- | --- | --- | --- |
+| IMDb | [IMDB Larger Photos](scripts/imdb/imdb-larger-photos.user.js) | Enlarges cast photos on IMDb full credits pages. | [Install](https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/imdb/imdb-larger-photos.user.js) |
+| Proxmox | [Proxmox VM Memory Buttons](scripts/proxmox/proxmox-vm-memory-buttons.user.js) | Adds quick memory preset buttons and +/- 1 GiB controls to the Create VM wizard. | [Install](https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/proxmox/proxmox-vm-memory-buttons.user.js) |
+| Reddit | [Load Reddit Images Directly](scripts/reddit/reddit-load-images-directly.user.js) | Rewrites Reddit image post links so thumbnails open the hosted image instead of the post page when a direct image is available. | [Install](https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/reddit/reddit-load-images-directly.user.js) |
+| YouTube | [YouTube Shorts Redirect](scripts/youtube/youtube-shorts-redirect.user.js) | Redirects `/shorts/...` URLs to standard `/watch?v=...` URLs and preserves existing query parameters. | [Install](https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/youtube/youtube-shorts-redirect.user.js) |
 
-Adds quick memory adjustment buttons to the "Create VM" wizard.
+Proxmox setup note: update the `@match` line before installing. See [scripts/proxmox/README.md](scripts/proxmox/README.md).
 
-### Features
+![IMDb Larger Photos screenshot](images/imdb-larger-photos.png)
 
-Features
+![Proxmox VM Memory Buttons screenshot](images/proxmox-vm-memory-buttons.png)
 
-- **Quick Memory Selection:** Adds preset buttons for common memory sizes (4, 8, 16, 32, 64 GiB) for quick selection.
-- **Increment/Decrement Buttons:** Includes +1G and -1G buttons to easily adjust the memory in increments or decrements of 1024 MiB.
-- **Rounded Adjustments:** Adjusts memory values to the nearest 1024 MiB, ensuring rounded memory configurations for better compatibility.
+## Notes
 
-![Screenshot](/images/proxmox-vm-memory-buttons.png)
-
-### Configuration
-
-The script uses the @match directive to determine which pages it should run on. The current configuration is set to `https://10.0.0.100:8006`, which is specific to a certain Proxmox instance.
-
-Change the @match directive to the URL of your Proxmox server. For example, if your Proxmox server is accessible at `https://proxmox.mydomain.com`, update the line to:
-
-```javascript
-// @match        https://proxmox.mydomain.com
-```
-
-If you have multiple servers you can add multiple `@match` lines
-
-- Each URL pattern needs its own @match line.
-- Patterns should be specific to avoid security risks associated with overly broad matches.
-
-## proxmox-vm-memory-slider.js (WIP)
-
-This is based on `proxmox-vm-memory-buttons.js` but would display the UI to the user as a slider bar like you would see in VMWare Workstation or VirtualBox.
-
-## YouTube Short Redirect - youtube-shorts-redirect.js
-
-YouTube Short links are redirected to normal video links to enable video controls.
+- Proxmox scripts are intentionally scoped to specific hosts. Keep their `@match` rules narrow.
+- The old empty `proxmox-vm-memory-slider.js` placeholder was removed. The idea is documented in the Proxmox folder until there is working code.
+- These scripts target current site layouts and may need maintenance when upstream UI changes.
