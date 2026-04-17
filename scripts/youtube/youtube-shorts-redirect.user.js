@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Shorts Redirect
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
-// @description  Redirects YouTube Shorts URLs to normal watch URLs.
+// @version      1.2.0
+// @description  Redirect YouTube Shorts URLs to normal watch URLs as early as possible.
 // @author       Landmine
 // @match        *://www.youtube.com/*
 // @match        *://youtube.com/*
@@ -19,7 +19,13 @@
     const SHORTS_PREFIX = '/shorts/';
 
     function getWatchUrl(urlString = window.location.href) {
-        const url = new URL(urlString, window.location.origin);
+        let url;
+
+        try {
+            url = new URL(urlString, window.location.origin);
+        } catch {
+            return null;
+        }
         if (!url.pathname.startsWith(SHORTS_PREFIX)) {
             return null;
         }
@@ -34,8 +40,8 @@
         return url.toString();
     }
 
-    function redirectIfNeeded() {
-        const targetUrl = getWatchUrl();
+    function redirectIfNeeded(urlString) {
+        const targetUrl = getWatchUrl(urlString);
         if (targetUrl && targetUrl !== window.location.href) {
             window.location.replace(targetUrl);
         }
@@ -44,9 +50,19 @@
     function wrapHistoryMethod(methodName) {
         const original = window.history[methodName];
 
+        if (typeof original !== 'function') {
+            return;
+        }
+
         window.history[methodName] = function (...args) {
             const result = original.apply(this, args);
-            redirectIfNeeded();
+
+            if (args.length >= 3 && typeof args[2] === 'string') {
+                redirectIfNeeded(args[2]);
+            } else {
+                redirectIfNeeded();
+            }
+
             return result;
         };
     }
@@ -54,8 +70,8 @@
     wrapHistoryMethod('pushState');
     wrapHistoryMethod('replaceState');
 
-    window.addEventListener('popstate', redirectIfNeeded);
-    document.addEventListener('yt-navigate-finish', redirectIfNeeded, true);
+    window.addEventListener('popstate', () => redirectIfNeeded());
+    document.addEventListener('yt-navigate-finish', () => redirectIfNeeded(), true);
 
     redirectIfNeeded();
 })();
