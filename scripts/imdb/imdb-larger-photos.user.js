@@ -8,8 +8,8 @@
 // @icon         https://www.imdb.com/favicon.ico
 // @grant        GM_addStyle
 // @run-at       document-end
-// @downloadURL  https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/imdb/imdb-larger-photos.user.js
-// @updateURL    https://raw.githubusercontent.com/Landmine-1252/userscripts/main/scripts/imdb/imdb-larger-photos.user.js
+// @downloadURL  https://raw.githubusercontent.com/Landmine-1252/userscripts/refs/heads/main/scripts/imdb/imdb-larger-photos.user.js
+// @updateURL    https://raw.githubusercontent.com/Landmine-1252/userscripts/refs/heads/main/scripts/imdb/imdb-larger-photos.user.js
 // ==/UserScript==
 
 (function () {
