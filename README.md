@@ -23,7 +23,13 @@ A small collection of personal userscripts, organized by site and kept installab
 
 Proxmox setup note: update the `@match` line before installing. See [scripts/proxmox/README.md](scripts/proxmox/README.md).
 
+## Screenshots
+
+### IMDb Larger Photos
+
 ![IMDb Larger Photos screenshot](images/imdb-larger-photos.png)
+
+### Proxmox VM Memory Buttons
 
 ![Proxmox VM Memory Buttons screenshot](images/proxmox-vm-memory-buttons.png)
 
