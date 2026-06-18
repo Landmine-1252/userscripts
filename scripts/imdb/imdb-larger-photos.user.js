@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMDB Larger Photos
 // @namespace    http://tampermonkey.net/
-// @version      1.3.0
+// @version      1.3.1
 // @description  Enlarges real credit photos on IMDb full credits pages and opens larger photos in-page.
 // @author       Landmine
 // @match        https://www.imdb.com/title/*/fullcredits*
@@ -16,7 +16,6 @@
     'use strict';
 
     const AVATAR_SIZE_REM = 15;
-    const AVATAR_GAP_REM = 1;
     const PHOTO_URL_ATTRIBUTE = 'data-landmine-imdb-photo-url';
     const PHOTO_FALLBACK_URL_ATTRIBUTE = 'data-landmine-imdb-photo-fallback-url';
     const MODAL_ID = 'landmine-imdb-photo-modal';
@@ -32,45 +31,60 @@
             display: none !important;
         }
 
+        ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} {
+            --landmine-imdb-photo-size: clamp(10rem, 22vw, ${AVATAR_SIZE_REM}rem);
+            --landmine-imdb-column-gap: clamp(0.75rem, 1.6vw, 1.25rem);
+        }
+
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${CONTENT_CLASS} {
-            min-height: ${AVATAR_SIZE_REM}rem !important;
+            min-height: var(--landmine-imdb-photo-size) !important;
             padding-left: 0 !important;
             position: relative !important;
         }
 
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${LAYOUT_CLASS} {
-            align-items: start !important;
+            align-items: center !important;
             display: grid !important;
-            gap: ${AVATAR_GAP_REM}rem !important;
-            grid-template-columns: ${AVATAR_SIZE_REM}rem minmax(0, 1fr) !important;
+            gap: var(--landmine-imdb-column-gap) !important;
+            grid-template-columns: var(--landmine-imdb-photo-size) minmax(0, 1fr) !important;
             width: 100% !important;
         }
 
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${PHOTO_COLUMN_CLASS} {
             align-items: stretch !important;
             display: flex !important;
-            flex: 0 0 ${AVATAR_SIZE_REM}rem !important;
+            flex: 0 0 var(--landmine-imdb-photo-size) !important;
             flex-direction: column !important;
             gap: 0.5rem !important;
             min-width: 0 !important;
             padding-right: 0 !important;
-            width: ${AVATAR_SIZE_REM}rem !important;
+            width: var(--landmine-imdb-photo-size) !important;
         }
 
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${DETAILS_COLUMN_CLASS} {
-            align-self: start !important;
+            align-self: center !important;
             align-items: baseline !important;
-            display: grid !important;
-            gap: 0.75rem !important;
-            grid-template-columns: minmax(10rem, 18rem) minmax(0, 1fr) !important;
+            column-gap: 0.75rem !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
             min-width: 0 !important;
             padding-right: 0.75rem !important;
+            row-gap: 0.35rem !important;
+            width: min(100%, 44rem) !important;
+        }
+
+        ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${DETAILS_COLUMN_CLASS} > * {
+            min-width: 0 !important;
+        }
+
+        ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${DETAILS_COLUMN_CLASS} > :not(.name-credits--title-text-small) {
+            flex: 1 1 14rem !important;
         }
 
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .ipc-avatar.name-credits--avatar {
-            width: ${AVATAR_SIZE_REM}rem !important;
-            height: ${AVATAR_SIZE_REM}rem !important;
-            min-width: ${AVATAR_SIZE_REM}rem !important;
+            width: var(--landmine-imdb-photo-size) !important;
+            height: var(--landmine-imdb-photo-size) !important;
+            min-width: var(--landmine-imdb-photo-size) !important;
             flex-shrink: 0 !important;
             margin: 0 !important;
             border-radius: 0 !important;
@@ -106,11 +120,31 @@
 
         ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .name-credits--title-text-small {
             display: inline !important;
+            flex: 0 1 auto !important;
             line-height: 1.25 !important;
             margin-top: 0 !important;
+            max-width: min(18rem, 100%) !important;
             overflow-wrap: anywhere !important;
             text-align: left !important;
             white-space: normal !important;
+        }
+
+        @media (max-width: 700px) {
+            ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} {
+                --landmine-imdb-photo-size: clamp(7.5rem, 32vw, 10rem);
+                --landmine-imdb-column-gap: 0.75rem;
+            }
+
+            ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${DETAILS_COLUMN_CLASS} {
+                align-items: flex-start !important;
+                flex-direction: column !important;
+                row-gap: 0.25rem !important;
+                width: 100% !important;
+            }
+
+            ${LIST_ITEM_SELECTOR}.${ITEM_CLASS} .${DETAILS_COLUMN_CLASS} > :not(.name-credits--title-text-small) {
+                flex: 1 1 auto !important;
+            }
         }
 
         #${MODAL_ID}[hidden] {
@@ -331,9 +365,9 @@
             const { fallbackUrl, photoUrl } = getPhotoUrls(image);
 
             Object.assign(avatar.style, {
-                width: `${AVATAR_SIZE_REM}rem`,
-                height: `${AVATAR_SIZE_REM}rem`,
-                minWidth: `${AVATAR_SIZE_REM}rem`,
+                width: 'var(--landmine-imdb-photo-size)',
+                height: 'var(--landmine-imdb-photo-size)',
+                minWidth: 'var(--landmine-imdb-photo-size)',
                 flexShrink: '0',
                 margin: '0',
                 borderRadius: '0',
@@ -363,14 +397,14 @@
                 height: '100%',
                 objectFit: 'cover',
             });
-            image.sizes = `${AVATAR_SIZE_REM}rem`;
+            image.sizes = `(max-width: 700px) 32vw, ${AVATAR_SIZE_REM}rem`;
         }
 
         if (content) {
             Object.assign(content.style, {
                 position: 'relative',
                 paddingLeft: '0',
-                minHeight: `${AVATAR_SIZE_REM}rem`,
+                minHeight: 'var(--landmine-imdb-photo-size)',
             });
         }
 
